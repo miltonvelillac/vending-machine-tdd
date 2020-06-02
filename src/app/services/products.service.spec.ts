@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ProductsService } from './products.service';
+import { Observable } from 'rxjs';
+import { Product, productsMock } from '../model/product';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -17,12 +19,13 @@ describe('ProductsService', () => {
   describe('#getAllProducts', () => {
     it(`Should show a list of products`, () => {
       // Arrange:
+      const expectedProducts: Product[] = JSON.parse(JSON.stringify(productsMock));
 
       // Act:
-      const listOfProducts: any[] = service.getAllProducts();
+      const products: Observable<Product[]> = service.getAllProducts();
 
       // Assert:
-      expect(listOfProducts).toEqual(expectedProductsList);
+      expect(products).toEqual(expectedProducts);
     });
   });
 });
