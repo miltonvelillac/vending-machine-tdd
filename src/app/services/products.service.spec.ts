@@ -17,12 +17,13 @@ describe('ProductsService', () => {
   });
 
   describe('#getAllProducts', () => {
-    it(`Should show a list of products`, () => {
+    it(`Should get the list of all products`, () => {
       // Arrange:
       const expectedProducts: Product[] = JSON.parse(JSON.stringify(productsMock));
+      let products: Product[];
 
       // Act:
-      const products: Observable<Product[]> = service.getAllProducts();
+      service.getAllProducts().subscribe((productsResponse: Product[]) => products = productsResponse);
 
       // Assert:
       expect(products).toEqual(expectedProducts);
