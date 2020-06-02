@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let fixture;
+  let component;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -14,9 +16,25 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
+  });
+
+  describe('#showProductList', () => {
+    it(`Should show a list of products`, () => {
+      // Arrange:
+      const expectedProductsNumber = 10;
+
+      // Act:
+      const listOfProducts: any[] = component.getProducts();
+
+      // Assert:
+      expect(listOfProducts.length).toBeGreaterThanOrEqual(expectedProductsNumber);
+    });
   });
 });
